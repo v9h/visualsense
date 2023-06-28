@@ -5,5 +5,7 @@ Fast &amp; easy way to use multiple client-sided modifications to multiple aspec
 ## Credits
 
 **Shlex** - UI Library
+
 **goonie1312** - Few of the client sided modifications
+
 **blade901** - Everything else
