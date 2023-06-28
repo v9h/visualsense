@@ -1,8 +1,3 @@
---[[
-PREPRE-release, only contains character modification
-
-Please try to Google the way to get a TXID of an item.
-]]
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
    Name = "VisualSense™",
@@ -10,16 +5,16 @@ local Window = Rayfield:CreateWindow({
    LoadingSubtitle = "by roll",
    ConfigurationSaving = {
       Enabled = true,
-      FolderName = 'VSFolder',
+      FolderName = 'VSFolder', -- Create a custom folder for your hub/game
       FileName = "VS"
    },
    Discord = {
       Enabled = true,
-      Invite = "KYZ729HW4", 
-      RememberJoins = true 
+      Invite = "KYZ729HW4", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
    }
 })
-local t1 = Window:CreateTab("Character Modifications") 
+local t1 = Window:CreateTab("Character Modifications") -- Title, Image
 local s1 = t1:CreateSection("Hats")
 local tb1 = t1:CreateInput({
    Name = "Hat Adder",
@@ -196,4 +191,117 @@ game.Players.LocalPlayer.Character.LeftFoot.MeshId = "9598310118"
 game.Players.LocalPlayer.Character.LeftFoot.Transparency = "1"
    end,
 })
+local t2 = Window:CreateTab("World Modifications")
+local s4 = t2:CreateSection("Ambience")
+local b5 = t2:CreateButton({
+   Name = "BetterAmbience™",
+   Callback = function()
+sethiddenproperty(game:GetService("Workspace").Terrain, "Decoration", true)
+sethiddenproperty(game:GetService("Lighting"), "Technology", "Future")
+local light = game.Lighting
+for i, v in pairs(light:GetChildren()) do
+	v:Destroy()
+end
 
+local ter = workspace.Terrain
+local color = Instance.new("ColorCorrectionEffect")
+local bloom = Instance.new("BloomEffect")
+local sun = Instance.new("SunRaysEffect")
+local blur = Instance.new("BlurEffect")
+
+color.Parent = light
+bloom.Parent = light
+sun.Parent = light
+blur.Parent = light
+
+-- enable or disable shit
+
+local config = {
+
+	Terrain = true;
+	ColorCorrection = true;
+	Sun = true;
+	Lighting = true;
+	BloomEffect = true;
+	
+}
+
+-- settings {
+
+color.Enabled = false
+color.Contrast = 0.15
+color.Brightness = 0.1
+color.Saturation = 0.25
+color.TintColor = Color3.fromRGB(255, 222, 211)
+
+bloom.Enabled = false
+bloom.Intensity = 0.1
+
+sun.Enabled = false
+sun.Intensity = 0.2
+sun.Spread = 1
+
+bloom.Enabled = false
+bloom.Intensity = 0.05
+bloom.Size = 32
+bloom.Threshold = 1
+
+blur.Enabled = false
+blur.Size = 6
+
+-- settings }
+
+
+if config.ColorCorrection then
+	color.Enabled = true
+end
+
+
+if config.Sun then
+	sun.Enabled = true
+end
+
+
+if config.Terrain then
+	-- settings {
+	ter.WaterColor = Color3.fromRGB(10, 10, 24)
+	ter.WaterWaveSize = 0.1
+	ter.WaterWaveSpeed = 22
+	ter.WaterTransparency = 0.9
+	ter.WaterReflectance = 0.05
+	-- settings }
+end
+
+
+if config.Lighting then
+	-- settings {
+	light.Ambient = Color3.fromRGB(0, 0, 0)
+	light.Brightness = 4
+	light.ColorShift_Bottom = Color3.fromRGB(0, 0, 0)
+	light.ColorShift_Top = Color3.fromRGB(0, 0, 0)
+	light.ExposureCompensation = 0
+	light.FogColor = Color3.fromRGB(132, 132, 132)
+	light.GlobalShadows = true
+	light.OutdoorAmbient = Color3.fromRGB(112, 117, 128)
+	light.Outlines = false
+	-- settings }
+end
+   end,
+})
+local s5 = t2:CreateSection("BetterAmbience Fixes")
+local b7 = t2:CreateButton({
+   Name = "Darkness Fix",
+   Callback = function()
+sethiddenproperty(game.Lighting, "Technology", "ShadowMap")
+   end,
+})
+local b6 = t2:CreateButton({
+   Name = "Grass Fix",
+   Callback = function()
+for i,v in pairs(workspace:GetDescendants()) do
+if v:IsA("Part") and Enum.Material.Grass and v.Size.Z > 500 then
+workspace.Terrain:FillBlock(v.CFrame, v.Size, Enum.Material.Grass)
+end
+end
+   end,
+})
